@@ -12,3 +12,8 @@ See the specific plugin install guides for help
 Just start load.cmd with the argument --plugins-beginn -enable:[plugin-name] --plugins-end
 
 You can include multiple plugins
+
+
+
+# Example Usage
+'"load.cmd path --silent --plugins-beginn -enable:elevator -enable:startup -enable:shutdown --plugins-end"'
