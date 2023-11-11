@@ -2,7 +2,7 @@
 REM An example payload.bat file
 
 
-echo This is a payload!
+echo This is an example payload!
 timeout 2
 
 exit
