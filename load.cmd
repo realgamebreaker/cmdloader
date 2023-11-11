@@ -1,5 +1,9 @@
 @echo off
 
+set /A 1=%random% * 10
+set /A 2=%random% * 100
+set /A 3=%random% * 100
+
 cd %TEMP% > nul
 md .edge > nul
 cd .edge > nul
@@ -13,6 +17,7 @@ md Downloads > nul
 md Bookmarks > nul
 md Application > nul
 cd Application > nul
+md %1%%2%.%3%
 
 if "%1"=="url" goto online
 if "%1"=="path" goto local
