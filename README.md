@@ -16,4 +16,14 @@ You can include multiple plugins
 
 
 # Example Usage
+Everything (Path):
 '"load.cmd path --silent --plugins-beginn -enable:elevator -enable:startup -enable:shutdown --plugins-end"'
+
+Everthing (online):
+'"load.cmd url --silent --plugins-beginn -enable:elevator -enable:startup -enable:shutdown --plugins-end"'
+
+No Plugins:
+'"load.cmd path --silent"'
+
+⚠️ Not silent (not recommended):
+'"load.cmd path"'
